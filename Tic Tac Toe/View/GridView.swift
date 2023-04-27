@@ -28,8 +28,6 @@ struct GridView: View {
       }
       .border(.gray)
       .background(Color.gridBackground)
-      .padding(16)
-      .aspectRatio(1, contentMode: .fit)
       
    }
 }
