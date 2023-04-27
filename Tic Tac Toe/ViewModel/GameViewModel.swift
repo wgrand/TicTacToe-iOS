@@ -93,6 +93,9 @@ import SwiftUI
    
    func checkWin(_ p: Player) -> [[Player]]? {
       
+      // TODO: Pass in the board instead of creating it for each case
+      // TODO: Decouple by passing in variables instead of referring to properties
+      
       lastWin = nil
       if let win = checkVerticalWin(p) {
          lastWin = win
@@ -102,8 +105,8 @@ import SwiftUI
          lastWin = win
       } else if let win = checkFourCornersWin(p) {
          lastWin = win
-         //      } else if let win = checkBlobWin(p) {
-         //         lastWin = win
+      } else if let win = check2x2Win(p) {
+         lastWin = win
       }
       
       return lastWin
@@ -261,6 +264,37 @@ import SwiftUI
    
    
    
+   func check2x2Win(_ p: Player) -> [[Player]]? {
+
+      let board = getBoard(from: tiles)
+      var w = getBlankMatrix(size: size)
+
+       // traverse by row
+       for v in 1..<size {
+
+           // traverse by column
+           for u in 1..<size {
+
+               // found match, so check left, above, and left-above
+               if board[v][u] == p {
+
+                   let leftP = u - 1 < 0 ? nil : board[v][u - 1]
+                   let aboveP = v - 1 < 0 ? nil : board[v - 1][u]
+                   let leftAboveP = (u - 1 < 0 || v - 1 < 0) ? nil : board[v - 1][u - 1]
+
+                   if leftP == p && aboveP == p && leftAboveP == p {
+                       w[v][u] = p
+                       w[v][u - 1] = p
+                       w[v - 1][u] = p
+                       w[v - 1][u - 1] = p
+                       return w
+                   }
+               }
+           }
+       }
+       return nil
+   }
+
    
    private func flashWin(_ w: [[Player]]) {
       print ("Win") // TODO: See ``MainActivity:flashWin()`
