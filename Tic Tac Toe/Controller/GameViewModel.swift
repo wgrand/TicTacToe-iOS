@@ -1,5 +1,5 @@
 //
-//  GameManager.swift
+//  GameViewModel.swift
 //  Tic Tac Toe
 //
 //  Created by William Grand on 4/26/23.
