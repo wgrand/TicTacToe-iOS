@@ -8,25 +8,36 @@
 import SwiftUI
 
 struct GridView: View {
+   
+   @EnvironmentObject var gameViewModel: GameViewModel
+   
+   var body: some View {
+      
+      LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: gameViewModel.dimen), spacing: 0) {
 
-  @ObservedObject var gameManager = GameManager()
+         ForEach($gameViewModel.tiles) { tile in
+            
+            Button { 
+                gameViewModel.tileTapped(tile: tile.wrappedValue)
+              } label: {
+                TileView(tile: tile.wrappedValue)
+            }
 
-  var body: some View {
-    LazyHGrid(rows: Array(repeating: GridItem(.flexible(), spacing: 0), count: 4), spacing: 0) {
-      ForEach(gameManager.tiles.indices) { index in
-        Tile(tileType: $gameManager.tiles[index].wrappedValue)
-          .onTapGesture {
-            gameManager.tileTapped(index: index)
-          }
+         }
+         
       }
-    }.padding(16)
-    .aspectRatio(1, contentMode: .fit)
-
-  }
+      .border(.gray)
+      .background(Color.gridBackground)
+      .padding(16)
+      .aspectRatio(1, contentMode: .fit)
+      
+   }
 }
 
 struct GridView_Previews: PreviewProvider {
-  static var previews: some View {
-    GridView()
-  }
+   
+   static var previews: some View {
+      GridView()
+         .environmentObject(GameViewModel())
+   }
 }

@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		442CD77B29F9B688001DE039 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD77A29F9B688001DE039 /* Tile.swift */; };
 		442CD77D29F9B7CC001DE039 /* TileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD77C29F9B7CC001DE039 /* TileType.swift */; };
 		442CD77F29F9B9B8001DE039 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD77E29F9B9B8001DE039 /* GridView.swift */; };
-		442CD78129F9BAF5001DE039 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD78029F9BAF5001DE039 /* GameManager.swift */; };
+		442CD78129F9BAF5001DE039 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD78029F9BAF5001DE039 /* GameViewModel.swift */; };
+		442CD78529FA10D4001DE039 /* OView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD78429FA10D4001DE039 /* OView.swift */; };
+		442CD78729FA1207001DE039 /* XView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD78629FA1207001DE039 /* XView.swift */; };
+		442CD78B29FA2597001DE039 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD78A29FA2597001DE039 /* Color.swift */; };
+		442CD78D29FAA552001DE039 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD78C29FAA552001DE039 /* TileView.swift */; };
+		442CD78F29FAAC03001DE039 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD78E29FAAC03001DE039 /* Tile.swift */; };
 		44D70AF429F99F9F00F1B780 /* Tic_Tac_ToeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D70AF329F99F9F00F1B780 /* Tic_Tac_ToeApp.swift */; };
 		44D70AF629F99F9F00F1B780 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D70AF529F99F9F00F1B780 /* ContentView.swift */; };
 		44D70AF829F99FA100F1B780 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44D70AF729F99FA100F1B780 /* Assets.xcassets */; };
@@ -38,10 +42,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		442CD77A29F9B688001DE039 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		442CD77C29F9B7CC001DE039 /* TileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileType.swift; sourceTree = "<group>"; };
 		442CD77E29F9B9B8001DE039 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
-		442CD78029F9BAF5001DE039 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		442CD78029F9BAF5001DE039 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		442CD78429FA10D4001DE039 /* OView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OView.swift; sourceTree = "<group>"; };
+		442CD78629FA1207001DE039 /* XView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XView.swift; sourceTree = "<group>"; };
+		442CD78A29FA2597001DE039 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		442CD78C29FAA552001DE039 /* TileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
+		442CD78E29FAAC03001DE039 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		44D70AF029F99F9F00F1B780 /* Tic Tac Toe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tic Tac Toe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		44D70AF329F99F9F00F1B780 /* Tic_Tac_ToeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tic_Tac_ToeApp.swift; sourceTree = "<group>"; };
 		44D70AF529F99F9F00F1B780 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -82,8 +90,10 @@
 		442CD77729F9B358001DE039 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				442CD77A29F9B688001DE039 /* Tile.swift */,
 				442CD77E29F9B9B8001DE039 /* GridView.swift */,
+				442CD78C29FAA552001DE039 /* TileView.swift */,
+				442CD78429FA10D4001DE039 /* OView.swift */,
+				442CD78629FA1207001DE039 /* XView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -91,7 +101,7 @@
 		442CD77829F9B368001DE039 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				442CD78029F9BAF5001DE039 /* GameManager.swift */,
+				442CD78029F9BAF5001DE039 /* GameViewModel.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -99,8 +109,24 @@
 		442CD77929F9B372001DE039 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				442CD78E29FAAC03001DE039 /* Tile.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		442CD78829FA21EE001DE039 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		442CD78929FA2581001DE039 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				442CD78A29FA2597001DE039 /* Color.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		44D70AE729F99F9F00F1B780 = {
@@ -129,9 +155,11 @@
 				44D70AF329F99F9F00F1B780 /* Tic_Tac_ToeApp.swift */,
 				44D70AF529F99F9F00F1B780 /* ContentView.swift */,
 				44D70AF729F99FA100F1B780 /* Assets.xcassets */,
+				442CD78929FA2581001DE039 /* Extensions */,
 				442CD77829F9B368001DE039 /* Controller */,
 				442CD77929F9B372001DE039 /* Model */,
 				442CD77729F9B358001DE039 /* View */,
+				442CD78829FA21EE001DE039 /* ViewModel */,
 				44D70AF929F99FA100F1B780 /* Preview Content */,
 				442CD77C29F9B7CC001DE039 /* TileType.swift */,
 			);
@@ -293,11 +321,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				442CD77B29F9B688001DE039 /* Tile.swift in Sources */,
-				442CD78129F9BAF5001DE039 /* GameManager.swift in Sources */,
+				442CD78529FA10D4001DE039 /* OView.swift in Sources */,
+				442CD78129F9BAF5001DE039 /* GameViewModel.swift in Sources */,
+				442CD78B29FA2597001DE039 /* Color.swift in Sources */,
 				442CD77D29F9B7CC001DE039 /* TileType.swift in Sources */,
 				44D70AF629F99F9F00F1B780 /* ContentView.swift in Sources */,
+				442CD78729FA1207001DE039 /* XView.swift in Sources */,
 				442CD77F29F9B9B8001DE039 /* GridView.swift in Sources */,
+				442CD78F29FAAC03001DE039 /* Tile.swift in Sources */,
+				442CD78D29FAA552001DE039 /* TileView.swift in Sources */,
 				44D70AF429F99F9F00F1B780 /* Tic_Tac_ToeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

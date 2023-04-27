@@ -8,20 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
-  var body: some View {
-    VStack {
-      Text("Tic Tac Toe")
-      GridView()
-      Button("New Game") {
-        print("New Game")
+   
+   @EnvironmentObject var gameViewModel: GameViewModel
+   @Environment(\.colorScheme) var colorScheme
+
+   var body: some View {
+      VStack {
+         Text("Tic Tac Toe")
+         Spacer()
+         Text("Current Player: \(gameViewModel.turn == .x ? "X" : "O")")
+         GridView()
+            .padding()
+         Button("New Game") {
+            gameViewModel.create()
+         }
+         Spacer()
       }
-    }
-    .padding()
-  }
+      .background(Color.background)
+   }
 }
 
 struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
+   static var previews: some View {
+      ContentView()
+         .environmentObject(GameViewModel())
+   }
 }
