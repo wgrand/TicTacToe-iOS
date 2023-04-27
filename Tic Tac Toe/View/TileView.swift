@@ -17,7 +17,7 @@ struct TileView: View {
             .fill(Color.clear)
             .border(.gray)
             .aspectRatio(1, contentMode: .fit)
-         switch(tile.tileType) {
+         switch(tile.player) {
          case .empty:
             EmptyView()
                .background(Color.purple)

@@ -13,12 +13,9 @@ struct OView: View {
   
   var body: some View {
     ZStack {
-      Circle()
-        .fill(colorScheme == .dark ? .white : .gray)
-        .frame(width: 50, height: 50)
-      Circle()
-        .fill(colorScheme == .dark ? .gray : .white)
-        .frame(width: 30, height: 30)
+       Circle()
+          .strokeBorder(Color(colorScheme == .dark ? .white : .gray), lineWidth: 10)
+          .frame(width: 50, height: 50)
     }
   }
 }

@@ -15,12 +15,12 @@ struct XView: View {
     ZStack {
       Rectangle()
         .fill(colorScheme == .dark ? .white : .gray)
-        .frame(width: 70, height: 10)
+        .frame(width: 50, height: 10)
         .rotationEffect(.degrees(45))        .aspectRatio(1, contentMode: .fit)
 
       Rectangle()
         .fill(colorScheme == .dark ? .white : .gray)
-        .frame(width: 70, height: 10)
+        .frame(width: 50, height: 10)
         .rotationEffect(.degrees(-45))        .aspectRatio(1, contentMode: .fit)
 
     }
