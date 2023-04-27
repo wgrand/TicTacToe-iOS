@@ -98,14 +98,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		442CD77829F9B368001DE039 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				442CD78029F9BAF5001DE039 /* GameViewModel.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		442CD77929F9B372001DE039 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +109,7 @@
 		442CD78829FA21EE001DE039 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				442CD78029F9BAF5001DE039 /* GameViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -156,7 +149,6 @@
 				44D70AF529F99F9F00F1B780 /* ContentView.swift */,
 				44D70AF729F99FA100F1B780 /* Assets.xcassets */,
 				442CD78929FA2581001DE039 /* Extensions */,
-				442CD77829F9B368001DE039 /* Controller */,
 				442CD77929F9B372001DE039 /* Model */,
 				442CD77729F9B358001DE039 /* View */,
 				442CD78829FA21EE001DE039 /* ViewModel */,
