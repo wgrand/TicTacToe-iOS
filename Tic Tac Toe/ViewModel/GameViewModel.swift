@@ -96,60 +96,112 @@ import SwiftUI
       lastWin = nil
       if let win = checkVerticalWin(p) {
          lastWin = win
-//      } else if let win = checkHorizontalWin(p) {
-//         lastWin = win
-//      } else if let win = checkDiagonalWin(p) {
-//         lastWin = win
-//      } else if let win = checkFourCornersWin(p) {
-//         lastWin = win
-//      } else if let win = checkBlobWin(p) {
-//         lastWin = win
+      } else if let win = checkHorizontalWin(p) {
+         lastWin = win
+         //      } else if let win = checkDiagonalWin(p) {
+         //         lastWin = win
+         //      } else if let win = checkFourCornersWin(p) {
+         //         lastWin = win
+         //      } else if let win = checkBlobWin(p) {
+         //         lastWin = win
       }
       
       return lastWin
       
    }
    
-   func checkVerticalWin(_ p: Player) -> [[Player]]? {
+   func getBoard(from tiles: [Tile]) -> [[Player]] {
       
       var board = [[Player]](repeating: [Player](repeating: .empty, count: size), count: size)
-      var w = [[Player]](repeating: [Player](repeating: .empty, count: size), count: size)
       
       _ = tiles.enumerated().map { (index, tile) in
          let row = index / size
          let col = index % size
          board[row][col] = tile.player
       }
-
-      var foundWinInColumn = false
+      
+      return board
+      
+   }
+   
+   func getBlankMatrix(size: Int) -> [[Player]] {
+      [[Player]](repeating: [Player](repeating: .empty, count: size), count: size)
+   }
+   
+   
+   
+   func checkVerticalWin(_ p: Player) -> [[Player]]? {
+      
+      let board = getBoard(from: self.tiles)
+      var w = getBlankMatrix(size: self.size)
+      
+      var didFindWin = false
       
       // traverse horizontally until we find a player
       for col in 0..<size {
-         if board[0][col] == p { // found possible win, traverse downward to verify
-            foundWinInColumn = true
-            
-            for row in 0..<size {
-               if board[row][col] == p {
-                  // populate the winning matrix with the player's marker
-                  w[row][col] = p
-               } else {
-                  // found opposing player, continue to loop through the columns
-                  foundWinInColumn = false
-                  // clear matrix
-                  w = [[Player]](repeating: [Player](repeating: .empty, count: size), count: size)
-                  break
-               }
+         
+         guard board[0][col] == p else { continue }
+         
+         // found possible win, traverse downward to verify
+         didFindWin = true
+         
+         for row in 0..<size {
+            if board[row][col] == p {
+               // populate the winning matrix with the player's marker
+               w[row][col] = p
+            } else {
+               // found opposing player, continue to loop through the columns
+               didFindWin = false
+               // clear matrix
+               w = [[Player]](repeating: [Player](repeating: .empty, count: size), count: size)
+               break
             }
-            
-            // entire column belonged to player, return true
-            if foundWinInColumn {
-               return w
-            }
+         }
+         
+         // entire column belonged to player, return true
+         if didFindWin {
+            return w
          }
       }
       
       return nil
    }
+   
+   
+   
+   func checkHorizontalWin(_ p: Player) -> [[Player]]? {
+      
+      let board = getBoard(from: self.tiles)
+      var w = getBlankMatrix(size: size)
+      
+      // traverse vertically until we find a player
+      var foundWinInRow = false
+      for row in 0..<size where board[row][0] == p { // found possible win, traverse downward to verify
+         foundWinInRow = true
+         for col in 0..<size {
+            if board[row][col] == p {
+               // populate the winning matrix with the player's marker
+               w[row][col] = p
+            } else {
+               // found opposing player, continue to loop through the rows
+               foundWinInRow = false
+               // clear matrix
+               w = [[Player]](repeating: [Player](repeating: .empty, count: size), count: size)
+               break
+            }
+         }
+         
+         // entire row belonged to player, return true
+         if foundWinInRow {
+            return w
+         }
+      }
+      
+      return nil
+   }
+   
+   
+   
    
    private func flashWin(_ w: [[Player]]) {
       print ("Win") // TODO: See ``MainActivity:flashWin()`
