@@ -100,8 +100,8 @@ import SwiftUI
          lastWin = win
       } else if let win = checkDiagonalWin(p) {
          lastWin = win
-         //      } else if let win = checkFourCornersWin(p) {
-         //         lastWin = win
+      } else if let win = checkFourCornersWin(p) {
+         lastWin = win
          //      } else if let win = checkBlobWin(p) {
          //         lastWin = win
       }
@@ -236,6 +236,30 @@ import SwiftUI
       
       return w // found win in bottom-left to top-right diagonal
    }
+   
+   
+   
+   func checkFourCornersWin(_ p: Player) -> [[Player]]? {
+      
+      let board = getBoard(from: tiles)
+      var w = getBlankMatrix(size: size)
+      
+      if board[0][0] == p
+            && board[size - 1][0] == p
+            && board[0][size - 1] == p
+            && board[size - 1][size - 1] == p {
+         
+         w[0][0] = p
+         w[size - 1][0] = p
+         w[0][size - 1] = p
+         w[size - 1][size - 1] = p
+         return w
+      }
+      
+      return nil
+   }
+   
+   
    
    
    private func flashWin(_ w: [[Player]]) {
