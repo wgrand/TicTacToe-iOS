@@ -98,8 +98,8 @@ import SwiftUI
          lastWin = win
       } else if let win = checkHorizontalWin(p) {
          lastWin = win
-         //      } else if let win = checkDiagonalWin(p) {
-         //         lastWin = win
+      } else if let win = checkDiagonalWin(p) {
+         lastWin = win
          //      } else if let win = checkFourCornersWin(p) {
          //         lastWin = win
          //      } else if let win = checkBlobWin(p) {
@@ -175,16 +175,16 @@ import SwiftUI
       var w = getBlankMatrix(size: size)
       
       // traverse vertically until we find a player
-      var foundWinInRow = false
+      var foundWin = false
       for row in 0..<size where board[row][0] == p { // found possible win, traverse downward to verify
-         foundWinInRow = true
+         foundWin = true
          for col in 0..<size {
             if board[row][col] == p {
                // populate the winning matrix with the player's marker
                w[row][col] = p
             } else {
                // found opposing player, continue to loop through the rows
-               foundWinInRow = false
+               foundWin = false
                // clear matrix
                w = [[Player]](repeating: [Player](repeating: .empty, count: size), count: size)
                break
@@ -192,7 +192,7 @@ import SwiftUI
          }
          
          // entire row belonged to player, return true
-         if foundWinInRow {
+         if foundWin {
             return w
          }
       }
@@ -201,6 +201,41 @@ import SwiftUI
    }
    
    
+   
+   func checkDiagonalWin(_ p: Player) -> [[Player]]? {
+      
+      let board = getBoard(from: tiles)
+      var w = getBlankMatrix(size: size)
+      
+      var foundWin = true
+      
+      // check top-left to bottom-right
+      for i in 0..<size {
+         if board[i][i] == p {
+            w[i][i] = p
+         } else { // no win found, move on to check other diagonal
+            foundWin = false
+            // clear matrix
+            w = [[Player]](repeating: [Player](repeating: .empty, count: size), count: size)
+            break
+         }
+      }
+      
+      if foundWin {
+         return w
+      }
+      
+      // check bottom-left to top-right
+      for i in 0..<size {
+         if board[i][size - 1 - i] == p {
+            w[i][size - 1 - i] = p
+         } else {
+            return nil // no win in this diagonal either, return false
+         }
+      }
+      
+      return w // found win in bottom-left to top-right diagonal
+   }
    
    
    private func flashWin(_ w: [[Player]]) {
