@@ -10,7 +10,7 @@ import Foundation
 class Tile: ObservableObject, Identifiable {
    
    let id: Int
-   @Published var tileType: TileType = .empty
+   @Published var player: Player = .empty
    
    init(id: Int) {
       self.id = id

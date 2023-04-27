@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		442CD77D29F9B7CC001DE039 /* TileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD77C29F9B7CC001DE039 /* TileType.swift */; };
+		442CD77D29F9B7CC001DE039 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD77C29F9B7CC001DE039 /* Player.swift */; };
 		442CD77F29F9B9B8001DE039 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD77E29F9B9B8001DE039 /* GridView.swift */; };
 		442CD78129F9BAF5001DE039 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD78029F9BAF5001DE039 /* GameViewModel.swift */; };
 		442CD78529FA10D4001DE039 /* OView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442CD78429FA10D4001DE039 /* OView.swift */; };
@@ -42,7 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		442CD77C29F9B7CC001DE039 /* TileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileType.swift; sourceTree = "<group>"; };
+		442CD77C29F9B7CC001DE039 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		442CD77E29F9B9B8001DE039 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		442CD78029F9BAF5001DE039 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		442CD78429FA10D4001DE039 /* OView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OView.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 				442CD77729F9B358001DE039 /* View */,
 				442CD78829FA21EE001DE039 /* ViewModel */,
 				44D70AF929F99FA100F1B780 /* Preview Content */,
-				442CD77C29F9B7CC001DE039 /* TileType.swift */,
+				442CD77C29F9B7CC001DE039 /* Player.swift */,
 			);
 			path = "Tic Tac Toe";
 			sourceTree = "<group>";
@@ -316,7 +316,7 @@
 				442CD78529FA10D4001DE039 /* OView.swift in Sources */,
 				442CD78129F9BAF5001DE039 /* GameViewModel.swift in Sources */,
 				442CD78B29FA2597001DE039 /* Color.swift in Sources */,
-				442CD77D29F9B7CC001DE039 /* TileType.swift in Sources */,
+				442CD77D29F9B7CC001DE039 /* Player.swift in Sources */,
 				44D70AF629F99F9F00F1B780 /* ContentView.swift in Sources */,
 				442CD78729FA1207001DE039 /* XView.swift in Sources */,
 				442CD77F29F9B9B8001DE039 /* GridView.swift in Sources */,
