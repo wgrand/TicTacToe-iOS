@@ -12,6 +12,8 @@ struct TileView: View {
    @ObservedObject var tile: Tile
    @State var opacity = 1.0
    
+   private let baseAnimation = Animation.easeInOut(duration: 1)
+   
    var body: some View {
       
       ZStack {
@@ -34,17 +36,30 @@ struct TileView: View {
                
             }
          }.opacity(opacity)
-          .onChange(of: tile.isWin) {
+            .onChange(of: tile.isWin) {
                if $0 {
-                  let baseAnimation = Animation.easeInOut(duration: 1)
                   let repeated = baseAnimation.repeatForever(autoreverses: true)
                   withAnimation(repeated) { opacity = 0.2 }
+               } else {
+                  stopAnimation()
                }
-          }
+            }
          
       }
       
    }
+   
+   func stopAnimation() {
+      var transaction = Transaction()
+      transaction.disablesAnimations = !tile.isWin
+      
+      withTransaction(transaction) {
+         withAnimation {
+            opacity = 1.0
+         }
+      }
+   }
+   
 }
 
 struct Tile_Previews: PreviewProvider {
