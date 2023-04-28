@@ -20,7 +20,7 @@ struct ContentView: View {
          GridView()
             .padding()
          Button("New Game") {
-            gameViewModel.create()
+            gameViewModel.reset()
          }
          Spacer()
       }
