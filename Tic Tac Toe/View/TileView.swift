@@ -10,30 +10,45 @@ import SwiftUI
 struct TileView: View {
    
    @ObservedObject var tile: Tile
+   @State var opacity = 1.0
    
    var body: some View {
+      
       ZStack {
+         
          Rectangle()
             .fill(Color.clear)
             .border(.gray)
             .aspectRatio(1, contentMode: .fit)
-         switch(tile.player) {
-         case .empty:
-            EmptyView()
-               .background(Color.purple)
-         case .x:
-            XView()
-            
-         case .o:
-            OView()
-            
-         }
+         
+         HStack {
+            switch(tile.player) {
+            case .empty:
+               EmptyView()
+               
+            case .x:
+               XView()
+               
+            case .o:
+               OView()
+               
+            }
+         }.opacity(opacity)
+          .onChange(of: tile.isWin) {
+               if $0 {
+                  let baseAnimation = Animation.easeInOut(duration: 1)
+                  let repeated = baseAnimation.repeatForever(autoreverses: true)
+                  withAnimation(repeated) { opacity = 0.2 }
+               }
+          }
+         
       }
+      
    }
 }
 
 struct Tile_Previews: PreviewProvider {
-   @ObservedObject static var tile: Tile = Tile(id: 0)
+   @ObservedObject static var tile: Tile = Tile(id: 0, player: .x)
    static var previews: some View {
       TileView(tile: tile)
    }
