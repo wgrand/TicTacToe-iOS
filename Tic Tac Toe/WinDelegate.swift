@@ -76,30 +76,24 @@ class WinDelegate : WinDelegateProtocol {
    func horizontal(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
       let size = board.count
-      
       var w = getBlankMatrix(size: size)
       
       // traverse vertically until we find a player
-      var foundWin = false
       for row in 0..<size where board[row][0] == p { // found possible win, traverse downward to verify
-         foundWin = true
+         
          for col in 0..<size {
             if board[row][col] == p {
                // populate the winning matrix with the player's marker
                w[row][col] = p
             } else {
                // found opposing player, continue to loop through the rows
-               foundWin = false
-               // clear matrix
-               w = [[Player]](repeating: [Player](repeating: .empty, count: size), count: size)
+               w = getBlankMatrix(size: size)
                break
             }
          }
          
-         // entire row belonged to player, return true
-         if foundWin {
-            return w
-         }
+         // entire row belonged to player, return win
+         return w
       }
       
       return nil

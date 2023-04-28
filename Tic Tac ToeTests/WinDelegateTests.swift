@@ -53,7 +53,7 @@ final class WinDelegateTests: XCTestCase {
                               [.empty, .empty, .empty, .x]])
    }
    
-   func testHorizontalWin() {
+   func testHorizontalWin1() {
       // Arrange
       let player = Player.o
       let board: [[Player]] = [
@@ -68,6 +68,24 @@ final class WinDelegateTests: XCTestCase {
       XCTAssertEqual(result, [[.o, .o, .o, .o],
                               [.empty, .empty, .empty, .empty],
                               [.empty, .empty, .empty, .empty],
+                              [.empty, .empty, .empty, .empty]])
+   }
+   
+   func testHorizontalWin2() {
+      // Arrange
+      let player = Player.o
+      let board: [[Player]] = [
+         [.x, .x, .x, .x],
+         [.empty, .empty, .empty, .empty],
+         [.o, .o, .o, .o],
+         [.empty, .empty, .empty, .empty]
+      ]
+      // Act
+      let result = delegate.horizontal(player, on: board)
+      // Assert
+      XCTAssertEqual(result, [[.empty, .empty, .empty, .empty],
+                              [.empty, .empty, .empty, .empty],
+                              [.o, .o, .o, .o],
                               [.empty, .empty, .empty, .empty]])
    }
    
