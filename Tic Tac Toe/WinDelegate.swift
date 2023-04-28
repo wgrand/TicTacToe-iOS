@@ -9,7 +9,7 @@ import Foundation
 
 /// A protocol that defines the functions needed to determine if a player has won the game
 protocol WinDelegateProtocol {
-      
+   
    func getBoard(from tiles: [Tile], size: Int) -> [[Player]]
    
    func vertical(_ p: Player, on board: [[Player]]) -> [[Player]]?
@@ -17,9 +17,9 @@ protocol WinDelegateProtocol {
    func diagonal(_ p: Player, on board: [[Player]]) -> [[Player]]?
    func fourCorners(_ p: Player, on board: [[Player]]) -> [[Player]]?
    func twoByTwo(_ p: Player, on board: [[Player]]) -> [[Player]]?
-
+   
    func all(tiles: [Tile], size: Int, player: Player) -> [[Player]]?
-
+   
 }
 
 /// A class that handles the logic for determining if a player has won the game
@@ -51,39 +51,24 @@ class WinDelegate : WinDelegateProtocol {
    func vertical(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
       let size = board.count
-
       var w = getBlankMatrix(size: size)
       
-      var didFindWin = false
-      
-      // traverse horizontally until we find a player
       for col in 0..<size {
-         
-         guard board[0][col] == p else { continue }
-         
-         // found possible win, traverse downward to verify
-         didFindWin = true
-         
+         var didFindWin = true
          for row in 0..<size {
-            if board[row][col] == p {
-               // populate the winning matrix with the player's marker
-               w[row][col] = p
-            } else {
-               // found opposing player, continue to loop through the columns
+            if board[row][col] != p {
                didFindWin = false
-               // clear matrix
-               w = [[Player]](repeating: [Player](repeating: .empty, count: size), count: size)
                break
             }
          }
-         
-         // entire column belonged to player, return true
          if didFindWin {
+            (0..<size).forEach { w[$0][col] = p }
             return w
          }
       }
       
       return nil
+      
    }
    
    
@@ -91,28 +76,22 @@ class WinDelegate : WinDelegateProtocol {
    func horizontal(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
       let size = board.count
-
       var w = getBlankMatrix(size: size)
       
       // traverse vertically until we find a player
-      var foundWin = false
       for row in 0..<size where board[row][0] == p { // found possible win, traverse downward to verify
-         foundWin = true
+         
+         var didFindWin = true
+
          for col in 0..<size {
-            if board[row][col] == p {
-               // populate the winning matrix with the player's marker
-               w[row][col] = p
-            } else {
-               // found opposing player, continue to loop through the rows
-               foundWin = false
-               // clear matrix
-               w = [[Player]](repeating: [Player](repeating: .empty, count: size), count: size)
+            if board[row][col] != p {
+               didFindWin = false
                break
             }
          }
          
-         // entire row belonged to player, return true
-         if foundWin {
+         if didFindWin {
+            (0..<size).forEach { w[row][$0] = p }
             return w
          }
       }
@@ -125,37 +104,35 @@ class WinDelegate : WinDelegateProtocol {
    func diagonal(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
       let size = board.count
-
+      
       var w = getBlankMatrix(size: size)
       
-      var foundWin = true
-      
       // check top-left to bottom-right
-      for i in 0..<size {
-         if board[i][i] == p {
-            w[i][i] = p
-         } else { // no win found, move on to check other diagonal
-            foundWin = false
-            // clear matrix
-            w = [[Player]](repeating: [Player](repeating: .empty, count: size), count: size)
-            break
-         }
+      var isWin = true
+      for i in 0..<size where board[i][i] != p {
+         isWin = false
+         break
       }
       
-      if foundWin {
+      if isWin {
+         (0..<size).forEach { w[$0][$0] = p }
          return w
       }
       
       // check bottom-left to top-right
-      for i in 0..<size {
-         if board[i][size - 1 - i] == p {
-            w[i][size - 1 - i] = p
-         } else {
-            return nil // no win in this diagonal either, return false
-         }
+      isWin = true
+      for i in 0..<size where board[i][size - 1 - i] != p {
+         isWin = false
+         break
       }
       
-      return w // found win in bottom-left to top-right diagonal
+      if isWin {
+         (0..<size).forEach { w[$0][size - 1 - $0] = p }
+         return w
+      }
+      
+      return nil
+      
    }
    
    
@@ -163,14 +140,13 @@ class WinDelegate : WinDelegateProtocol {
    func fourCorners(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
       let size = board.count
-
-      var w = getBlankMatrix(size: size)
       
       if board[0][0] == p
             && board[size - 1][0] == p
             && board[0][size - 1] == p
             && board[size - 1][size - 1] == p {
          
+         var w = getBlankMatrix(size: size)
          w[0][0] = p
          w[size - 1][0] = p
          w[0][size - 1] = p
@@ -184,7 +160,7 @@ class WinDelegate : WinDelegateProtocol {
    
    
    func twoByTwo(_ p: Player, on board: [[Player]]) -> [[Player]]? {
-            
+      
       let size = board.count
       
       // traverse by row
@@ -193,21 +169,16 @@ class WinDelegate : WinDelegateProtocol {
          // traverse by column
          for u in 1..<size {
             
-            // found match, so check left, above, and left-above
-            if board[v][u] == p {
-               
-               let leftP = u - 1 < 0 ? nil : board[v][u - 1]
-               let aboveP = v - 1 < 0 ? nil : board[v - 1][u]
-               let leftAboveP = (u - 1 < 0 || v - 1 < 0) ? nil : board[v - 1][u - 1]
-               
-               if leftP == p && aboveP == p && leftAboveP == p {
-                  var w = getBlankMatrix(size: size)
-                  w[v][u] = p
-                  w[v][u - 1] = p
-                  w[v - 1][u] = p
-                  w[v - 1][u - 1] = p
-                  return w
-               }
+            if board[v][u] == p,
+               board[v][u-1] == p,
+               board[v-1][u] == p,
+               board[v-1][u-1] == p {
+               var w = getBlankMatrix(size: size)
+               w[v][u] = p
+               w[v][u - 1] = p
+               w[v - 1][u] = p
+               w[v - 1][u - 1] = p
+               return w
             }
          }
       }
@@ -228,6 +199,7 @@ class WinDelegate : WinDelegateProtocol {
       }
       
       return nil
+      
    }
    
    
