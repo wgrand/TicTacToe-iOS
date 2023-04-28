@@ -15,8 +15,10 @@ struct OView: View {
     ZStack {
        Circle()
           .strokeBorder(Color(colorScheme == .dark ? .white : .gray), lineWidth: 10)
-          .frame(width: 50, height: 50)
+          .frame(width: 45, height: 45)
     }
+    .frame(width: 45, height: 45)
+
   }
 }
 

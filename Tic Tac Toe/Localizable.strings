@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  Tic Tac Toe
+
+  Created by William Grand on 4/28/23.
+  
+*/
+
+"title" = "Tic Tac Toe";
+
+"current_player_title" = "Current Player:";
+
+"newgame_button_title" = "NEW GAME";
+
+"endgame_alert_message" = "Play again?";
+"endgame_alert_button_yes" = "Yes";
+"endgame_alert_win" = "Player %s won!";
+"endgame_alert_tie" = "Tie!";
