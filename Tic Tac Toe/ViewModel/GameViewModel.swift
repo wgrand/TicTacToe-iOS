@@ -16,8 +16,9 @@ import SwiftUI
    
    @Published var tiles: [Tile]
    @Published private(set) var turn: Player = .x
-   @Published var isShowingWin = false
+   @Published var lastWin: [[Player]]?
    
+
    init(dimen: Int = 4) {
       self.size = dimen
       self.tiles = (0..<(dimen*dimen)).map { Tile(id: $0) }
@@ -76,8 +77,6 @@ import SwiftUI
    }
    
    // MARK: Check wins
-   
-   private var lastWin: [[Player]]? // TODO: Do I need to have this property?
    
    func getWinningMatrix() -> [[Player]]? {
       if let winner = checkWin(.o) ?? checkWin(.x) {
@@ -282,7 +281,16 @@ import SwiftUI
    
    
    private func flashWin(_ w: [[Player]]) {
-      print ("Win") // TODO: See ``MainActivity:flashWin()`
+      
+      for row in 0..<w.count {
+         for col in 0..<w[row].count {
+            if w[row][col] != .empty {
+               let index = row*w[row].count + col
+               tiles[index].isWin = true
+            }
+         }
+      }
+      
    }
    
    

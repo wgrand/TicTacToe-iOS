@@ -11,9 +11,11 @@ class Tile: ObservableObject, Identifiable {
    
    let id: Int
    @Published var player: Player = .empty
+   @Published var isWin = false
    
-   init(id: Int) {
+   init(id: Int, player: Player = .empty) {
       self.id = id
+      self.player = player
    }
    
 }
