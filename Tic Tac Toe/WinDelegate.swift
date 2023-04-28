@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A protocol that defines the functions needed to determine if a player has won the game
 protocol WinDelegateProtocol {
       
    func getBoard(from tiles: [Tile], size: Int) -> [[Player]]
@@ -21,8 +22,10 @@ protocol WinDelegateProtocol {
 
 }
 
+/// A class that handles the logic for determining if a player has won the game
 class WinDelegate : WinDelegateProtocol {
    
+   // MARK: Helper functions
    func getBoard(from tiles: [Tile], size: Int) -> [[Player]] {
       
       var board = [[Player]](repeating: [Player](repeating: .empty, count: size), count: size)
@@ -42,7 +45,9 @@ class WinDelegate : WinDelegateProtocol {
    }
    
    
+   // MARK: Wins
    
+   /// Checks for a win in the vertical columns of the board
    func vertical(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
       let size = board.count
@@ -82,7 +87,7 @@ class WinDelegate : WinDelegateProtocol {
    }
    
    
-   
+   /// Checks for a win in the horizontal rows of the board
    func horizontal(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
       let size = board.count
@@ -116,7 +121,7 @@ class WinDelegate : WinDelegateProtocol {
    }
    
    
-   
+   /// Checks for a win in the two diagonals of the board
    func diagonal(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
       let size = board.count
@@ -154,7 +159,7 @@ class WinDelegate : WinDelegateProtocol {
    }
    
    
-   
+   /// Checks for a win in the four corners of the board
    func fourCorners(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
       let size = board.count

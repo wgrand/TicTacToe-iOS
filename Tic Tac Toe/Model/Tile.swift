@@ -18,4 +18,9 @@ class Tile: ObservableObject, Identifiable {
       self.player = player
    }
    
+   func reset() {
+      self.player = .empty
+      self.isWin = false
+   }
+   
 }
