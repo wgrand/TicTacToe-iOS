@@ -252,9 +252,7 @@ import SwiftUI
    
    
    func check2x2Win(_ p: Player, on board: [[Player]]) -> [[Player]]? {
-      
-      var w = getBlankMatrix(size: size)
-      
+            
       // traverse by row
       for v in 1..<size {
          
@@ -269,6 +267,7 @@ import SwiftUI
                let leftAboveP = (u - 1 < 0 || v - 1 < 0) ? nil : board[v - 1][u - 1]
                
                if leftP == p && aboveP == p && leftAboveP == p {
+                  var w = getBlankMatrix(size: size)
                   w[v][u] = p
                   w[v][u - 1] = p
                   w[v - 1][u] = p
