@@ -161,14 +161,14 @@ class WinDelegate : WinDelegateProtocol {
    func fourCorners(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
       let size = board.count
-
-      var w = getBlankMatrix(size: size)
       
       if board[0][0] == p
             && board[size - 1][0] == p
             && board[0][size - 1] == p
             && board[size - 1][size - 1] == p {
          
+         var w = getBlankMatrix(size: size)
+
          w[0][0] = p
          w[size - 1][0] = p
          w[0][size - 1] = p
