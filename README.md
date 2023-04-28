@@ -1,5 +1,3 @@
-# TicTacToe-iOS
-
 # Tic Tac Toe for iOS
 
 A classic Tic Tac Toe game for iOS with a 4x4 board, dark mode, unit tests, localization, and support for iOS 15. The game follows the standard Tic Tac Toe rules with some additional win indicators.
