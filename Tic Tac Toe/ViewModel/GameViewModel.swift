@@ -59,6 +59,8 @@ import SwiftUI
       
       selectedTile.player = turn
       
+      moveCount += 1
+
       if let winningMatrix = getWinningMatrix() {
          didWin(winningMatrix, winner: turn)
       } else if maxMovesReached {
@@ -66,7 +68,6 @@ import SwiftUI
       }
       
       turn = turn == .x ? .o : .x
-      moveCount += 1
       
    }
    

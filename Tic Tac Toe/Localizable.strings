@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  Tic Tac Toe
+
+  Created by William Grand on 4/28/23.
+  
+*/
+
+"endgame_alert_message" = "Play Again?";
+"endgame_alert_button_yes" = "Yes";
+"endgame_alert_win" = "Player %s Won!";
+"endgame_alert_tie" = "Tie!";
