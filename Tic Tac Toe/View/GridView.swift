@@ -10,18 +10,19 @@ import SwiftUI
 struct GridView: View {
    
    @EnvironmentObject var gameViewModel: GameViewModel
-   
+
    var body: some View {
       
-      LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: gameViewModel.size), spacing: 0) {
+      LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0),
+                               count: gameViewModel.size), spacing: 0) {
 
          ForEach($gameViewModel.tiles) { tile in
             
             Button { 
                 gameViewModel.tileTapped(tile: tile.wrappedValue)
               } label: {
-                TileView(tile: tile.wrappedValue)
-            }
+                TileView(tile: tile.wrappedValue)                 
+              }
 
          }
          
