@@ -29,6 +29,14 @@ struct GridView: View {
       }
       .border(.gray)
       .background(Color.gridBackground)
+      .alert(isPresented: $gameViewModel.isShowingEndGameAlert) {
+         Alert(title: Text($gameViewModel.endGameText.wrappedValue),
+                          message: Text(LocalizedStringKey("endgame_alert_message")),
+                          primaryButton: .default(Text("endgame_alert_button_yes"), action: {
+                           gameViewModel.reset()
+                          }),
+                          secondaryButton: .cancel())
+       }
       
    }
 }

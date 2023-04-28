@@ -15,6 +15,8 @@ import SwiftUI
    private var moveCount: Int
    private var delegate: WinDelegateProtocol
    
+   @Published var isShowingEndGameAlert = false
+   @Published var endGameText = ""
    @Published var tiles: [Tile]
    @Published private(set) var turn: Player
 
@@ -31,11 +33,12 @@ import SwiftUI
       self.init(size: 4)
    }
    
-   func create() {
+   func reset() {
       self.tiles.forEach { $0.reset() }
       self.turn = .x
       self.moveCount = 0
       self.gameState = .inProgress
+      self.isShowingEndGameAlert = false
    }
    
    
@@ -55,14 +58,16 @@ import SwiftUI
       guard selectedTile.player == .empty else { return }
       
       selectedTile.player = turn
-      turn = turn == .x ? .o : .x
-      moveCount += 1
       
+      moveCount += 1
+
       if let winningMatrix = getWinningMatrix() {
-         didWin(winningMatrix)
+         didWin(winningMatrix, winner: turn)
       } else if maxMovesReached {
          didTie()
       }
+      
+      turn = turn == .x ? .o : .x
       
    }
    
@@ -79,7 +84,7 @@ import SwiftUI
 
 
    
-   private func didWin(_ w: [[Player]]) {
+   private func didWin(_ w: [[Player]], winner: Player) {
       
       for row in 0..<w.count {
          for col in 0..<w[row].count {
@@ -91,42 +96,17 @@ import SwiftUI
       }
       
       gameState = .ended
+      isShowingEndGameAlert = true
+      endGameText = "Player \(winner) won!"
       
    }
    
    private func didTie() {
       gameState = .ended
+      isShowingEndGameAlert = true
+      endGameText = "Tie!"
    }
-   
-   
-   
-   
-   
-   /**
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    
-    int col = position % GameManager.dimen;
-    int row = position / GameManager.dimen;
-    
-    boolean moveMade = GameManager.makeMove(row, col);
-    
-    if (moveMade) {
-    
-    // update board
-    drawBoard();
-    
-    // the board with just the winning markers
-    Player[][] w = GameManager.getWinningMatrix();
-    
-    if (w != null) // we found a winner, display the win to the players
-    flashWin(w);
-    else if (GameManager.maxMovesReached()) // there was a tie, display it to the players
-    Toast.makeText(MainActivity.this, "Tie!", Toast.LENGTH_LONG).show();
-    
-    }
-    
-    }
-    */
+
    
 }
 
