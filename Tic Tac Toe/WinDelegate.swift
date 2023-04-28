@@ -127,35 +127,33 @@ class WinDelegate : WinDelegateProtocol {
       let size = board.count
 
       var w = getBlankMatrix(size: size)
-      
-      var foundWin = true
-      
+            
       // check top-left to bottom-right
-      for i in 0..<size {
-         if board[i][i] == p {
-            w[i][i] = p
-         } else { // no win found, move on to check other diagonal
-            foundWin = false
-            // clear matrix
-            w = [[Player]](repeating: [Player](repeating: .empty, count: size), count: size)
-            break
-         }
+      var isWin = true
+      for i in 0..<size where board[i][i] != p {
+         isWin = false
+         break
+      }
+   
+      if isWin {
+         (0..<size).forEach { w[$0][$0] = p }
+         return w
+      }
+
+      // check bottom-left to top-right
+      isWin = true
+      for i in 0..<size where board[i][size - 1 - i] != p {
+         isWin = false
+         break
       }
       
-      if foundWin {
+      if isWin {
+         (0..<size).forEach { w[$0][size - 1 - $0] = p }
          return w
       }
       
-      // check bottom-left to top-right
-      for i in 0..<size {
-         if board[i][size - 1 - i] == p {
-            w[i][size - 1 - i] = p
-         } else {
-            return nil // no win in this diagonal either, return false
-         }
-      }
+      return nil
       
-      return w // found win in bottom-left to top-right diagonal
    }
    
    
