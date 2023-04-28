@@ -17,6 +17,26 @@ final class WinDelegateTests: XCTestCase {
       delegate = WinDelegate()
    }
    
+   func testOneFail() {
+      // Arrange
+      let p = Player.x
+      let board: [[Player]] = [
+         [.x, .empty, .empty, .empty],
+         [.empty, .empty, .empty, .empty],
+         [.empty, .empty, .empty, .empty],
+         [.empty, .empty, .empty, .empty]
+      ]
+      // Act
+      let result = delegate.vertical(p, on: board) ??
+      delegate.horizontal(p, on: board) ??
+      delegate.diagonal(p, on: board) ??
+      delegate.fourCorners(p, on: board) ??
+      delegate.twoByTwo(p, on: board)
+      
+      // Assert
+      XCTAssertEqual(result, nil)
+   }
+   
    func testVerticalWin1() {
       // Arrange
       let player = Player.x

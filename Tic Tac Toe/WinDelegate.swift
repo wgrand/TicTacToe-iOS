@@ -81,19 +81,19 @@ class WinDelegate : WinDelegateProtocol {
       // traverse vertically until we find a player
       for row in 0..<size where board[row][0] == p { // found possible win, traverse downward to verify
          
+         var didFindWin = true
+
          for col in 0..<size {
-            if board[row][col] == p {
-               // populate the winning matrix with the player's marker
-               w[row][col] = p
-            } else {
-               // found opposing player, continue to loop through the rows
-               w = getBlankMatrix(size: size)
+            if board[row][col] != p {
+               didFindWin = false
                break
             }
          }
          
-         // entire row belonged to player, return win
-         return w
+         if didFindWin {
+            (0..<size).forEach { w[row][$0] = p }
+            return w
+         }
       }
       
       return nil
