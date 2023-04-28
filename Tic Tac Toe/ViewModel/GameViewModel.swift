@@ -80,35 +80,26 @@ import SwiftUI
    private var lastWin: [[Player]]? // TODO: Do I need to have this property?
    
    func getWinningMatrix() -> [[Player]]? {
-      lastWin = nil
-      if let checkOWin = checkWin(.o) {
-         lastWin = checkOWin
-         return lastWin
-      } else if let checkXWin = checkWin(.x) {
-         lastWin = checkXWin
-         return lastWin
+      if let winner = checkWin(.o) ?? checkWin(.x) {
+         lastWin = winner
       }
       return lastWin
    }
    
    func checkWin(_ p: Player) -> [[Player]]? {
       
-      // TODO: Pass in the board instead of creating it for each case
+      let board = getBoard(from: self.tiles)
       // TODO: Decouple by passing in variables instead of referring to properties
       
-      lastWin = nil
-      if let win = checkVerticalWin(p) {
+      if let win = checkVerticalWin(p, on: board) ??
+            checkHorizontalWin(p, on: board) ??
+            checkDiagonalWin(p, on: board) ??
+            checkFourCornersWin(p, on: board) ??
+            check2x2Win(p, on: board) {
          lastWin = win
-      } else if let win = checkHorizontalWin(p) {
-         lastWin = win
-      } else if let win = checkDiagonalWin(p) {
-         lastWin = win
-      } else if let win = checkFourCornersWin(p) {
-         lastWin = win
-      } else if let win = check2x2Win(p) {
-         lastWin = win
+      } else {
+         lastWin = nil
       }
-      
       return lastWin
       
    }
@@ -133,9 +124,8 @@ import SwiftUI
    
    
    
-   func checkVerticalWin(_ p: Player) -> [[Player]]? {
+   func checkVerticalWin(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
-      let board = getBoard(from: self.tiles)
       var w = getBlankMatrix(size: self.size)
       
       var didFindWin = false
@@ -172,9 +162,8 @@ import SwiftUI
    
    
    
-   func checkHorizontalWin(_ p: Player) -> [[Player]]? {
+   func checkHorizontalWin(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
-      let board = getBoard(from: self.tiles)
       var w = getBlankMatrix(size: size)
       
       // traverse vertically until we find a player
@@ -205,9 +194,8 @@ import SwiftUI
    
    
    
-   func checkDiagonalWin(_ p: Player) -> [[Player]]? {
+   func checkDiagonalWin(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
-      let board = getBoard(from: tiles)
       var w = getBlankMatrix(size: size)
       
       var foundWin = true
@@ -242,9 +230,8 @@ import SwiftUI
    
    
    
-   func checkFourCornersWin(_ p: Player) -> [[Player]]? {
+   func checkFourCornersWin(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
-      let board = getBoard(from: tiles)
       var w = getBlankMatrix(size: size)
       
       if board[0][0] == p
@@ -264,9 +251,8 @@ import SwiftUI
    
    
    
-   func check2x2Win(_ p: Player) -> [[Player]]? {
+   func check2x2Win(_ p: Player, on board: [[Player]]) -> [[Player]]? {
       
-      let board = getBoard(from: tiles)
       var w = getBlankMatrix(size: size)
       
       // traverse by row
