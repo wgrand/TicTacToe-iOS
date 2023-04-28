@@ -10,32 +10,36 @@ import SwiftUI
 struct GridView: View {
    
    @EnvironmentObject var gameViewModel: GameViewModel
-
+   
    var body: some View {
       
       LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0),
                                count: gameViewModel.size), spacing: 0) {
-
+         
          ForEach($gameViewModel.tiles) { tile in
             
-            Button { 
-                gameViewModel.tileTapped(tile: tile.wrappedValue)
-              } label: {
-                TileView(tile: tile.wrappedValue)                 
-              }
-
+            Button {
+               gameViewModel.tileTapped(tile: tile.wrappedValue)
+            } label: {
+               TileView(tile: tile.wrappedValue)
+            }
+            
          }
          
       }
-      .border(.gray)
-      .background(Color.gridBackground)
-      .alert(isPresented: $gameViewModel.isShowingEndGameAlert) {
-         Alert(title: Text($gameViewModel.endGameText.wrappedValue),
-                          message: Text(LocalizedStringKey("endgame_alert_message")),
-                          primaryButton: .default(Text("endgame_alert_button_yes"), action: {
-                           gameViewModel.reset()
-                          }),
-                          secondaryButton: .cancel())
+       .background(Color.gridBackground)
+       .cornerRadius(10)
+       .overlay(
+         RoundedRectangle(cornerRadius: 10)
+            .stroke(.gray, lineWidth: 2)
+       )
+       .alert(isPresented: $gameViewModel.isShowingEndGameAlert) {
+          Alert(title: Text($gameViewModel.endGameText.wrappedValue),
+                message: Text(LocalizedStringKey("endgame_alert_message")),
+                primaryButton: .default(Text("endgame_alert_button_yes"), action: {
+             gameViewModel.reset()
+          }),
+                secondaryButton: .cancel())
        }
       
    }

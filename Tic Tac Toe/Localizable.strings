@@ -6,7 +6,13 @@
   
 */
 
-"endgame_alert_message" = "Play Again?";
+"title" = "Tic Tac Toe";
+
+"current_player_title" = "Current Player:";
+
+"newgame_button_title" = "NEW GAME";
+
+"endgame_alert_message" = "Play again?";
 "endgame_alert_button_yes" = "Yes";
-"endgame_alert_win" = "Player %s Won!";
+"endgame_alert_win" = "Player %s won!";
 "endgame_alert_tie" = "Tie!";
