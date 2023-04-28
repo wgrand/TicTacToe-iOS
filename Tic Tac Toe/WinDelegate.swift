@@ -168,7 +168,6 @@ class WinDelegate : WinDelegateProtocol {
             && board[size - 1][size - 1] == p {
          
          var w = getBlankMatrix(size: size)
-         
          w[0][0] = p
          w[size - 1][0] = p
          w[0][size - 1] = p
